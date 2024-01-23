@@ -1,5 +1,3 @@
-package EmployeeDetails;
-
 import java.util.List;
 
 public class Shift {
@@ -17,5 +15,11 @@ public class Shift {
 
     public List<String> getRequiredSkills() {
         return requiredSkills;
+    }
+    public String toString() {
+        return "Shift{" +
+                "shiftName='" + shiftName + '\'' +
+                ", requiredSkills=" + requiredSkills +
+                '}';
     }
 }

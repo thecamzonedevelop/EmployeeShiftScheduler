@@ -1,12 +1,10 @@
-package EmployeeDetails;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Schedule {
-    private Map<String, List<Employee>> shiftAssignments;
+    private final Map<String, List<Employee>> shiftAssignments;
 
     public Schedule() {
         this.shiftAssignments = new HashMap<>();
