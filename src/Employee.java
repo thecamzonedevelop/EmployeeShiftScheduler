@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class Employee {
-    private String name;
-    private List<String> skills;
-    private int maxWeeklyHours;
+    private final String name;
+    private final List<String> skills;
+    private final int maxWeeklyHours;
 
     public Employee(String name, List<String> skills, int maxWeeklyHours) {
         this.name = name;

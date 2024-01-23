@@ -14,7 +14,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         System.out.print("Enter the employee's name: ");
         String name = scanner.next();
 
-        // Validate that the name only contains characters from A to Z
+
         if (!name.matches("[A-Za-z]+")) {
             System.out.println("Invalid name. Please enter a name containing only alphabetic characters.");
             return;
@@ -24,7 +24,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         displayOptions();
         List<String> selectedSkills = chooseFromOptions(scanner);
 
-        // Display a preview of the shifts the employee will work based on selected skills
+
         System.out.println("Shift Preview:");
         for (String skill : selectedSkills) {
             List<Shift> shiftsForSkill = getShiftsForSkill(skill);
