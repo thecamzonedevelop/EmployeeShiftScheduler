@@ -6,7 +6,7 @@ public class Main {
         schedulingSystem.initializeSampleData();
 
         Scanner scanner = new Scanner(System.in);
-        int choice;
+        int choice = 0;
 
         do {
             System.out.println("1. Add New Employee");
@@ -14,8 +14,15 @@ public class Main {
             System.out.println("3. View Employee");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine();
+                continue;
+            }
+
 
             switch (choice) {
                 case 1:
