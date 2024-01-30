@@ -11,9 +11,11 @@ public class Main {
         do {
             System.out.println("1. Add New Employee");
             System.out.println("2. View Shift Schedule");
-            System.out.println("3. Exit");
+            System.out.println("3. View Employee");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -23,13 +25,15 @@ public class Main {
                     schedulingSystem.viewShiftSchedule();
                     break;
                 case 3:
+                    schedulingSystem.viewEmployee();
+                case 4:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
 
-        } while (choice != 3);
+        } while (choice != 4);
 
         scanner.close();
     }

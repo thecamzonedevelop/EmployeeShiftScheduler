@@ -6,4 +6,5 @@ public interface SchedulingSystem {
     void viewShiftSchedule();
 
     void initializeSampleData();
+    void viewEmployee();
 }
