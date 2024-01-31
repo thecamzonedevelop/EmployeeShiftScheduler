@@ -6,6 +6,7 @@ public class Main {
         schedulingSystem.initializeSampleData();
 
         Scanner scanner = new Scanner(System.in);
+        schedulingSystem.firstLogin(scanner);
         int choice = 0;
 
         do {

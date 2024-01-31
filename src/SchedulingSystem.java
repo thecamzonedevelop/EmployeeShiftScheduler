@@ -7,4 +7,6 @@ public interface SchedulingSystem {
 
     void initializeSampleData();
     void viewEmployee();
+    void firstLogin(Scanner scanner);
+
 }
