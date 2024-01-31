@@ -33,7 +33,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
             count ++;
         }
 
-        int shiftSelected = 0;
+        int shiftSelected;
         boolean shiftAvailable = false;
         while (!shiftAvailable) {
             List<String> OptionSkills = new ArrayList<>(selectedSkills);
@@ -46,7 +46,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
                 addNewEmployee(scanner);
             }
 
-            String selectedSkill = "";
+            String selectedSkill;
             selectedSkill = OptionSkills.get(shiftSelected - 1);
             OptionSkills.clear();
             OptionSkills.add(selectedSkill);
