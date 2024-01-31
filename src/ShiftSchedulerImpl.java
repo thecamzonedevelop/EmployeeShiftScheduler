@@ -12,16 +12,9 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
     @Override
     public void addNewEmployee(Scanner scanner) {
         System.out.print("Enter the employee's name: ");
-<<<<<<< HEAD
-        String name = scanner.next();
-
-
-        if (!name.matches("[A-Za-z]+")) {
-=======
         String name = scanner.nextLine();
         String trimmedName = name.trim();
         if (!trimmedName.matches("[A-Za-z ]+")) {
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
             System.out.println("Invalid name. Please enter a name containing only alphabetic characters.");
             return;
         }
@@ -30,14 +23,6 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         displayOptions();
         List<String> selectedSkills = chooseFromOptions(scanner);
 
-<<<<<<< HEAD
-
-        System.out.println("Shift Preview:");
-        for (String skill : selectedSkills) {
-            List<Shift> shiftsForSkill = getShiftsForSkill(skill);
-            System.out.println("Skill: " + skill + " -> Shifts: " + shiftsForSkill);
-        }
-=======
         System.out.println("Shift Preview:");
         int count = 1;
         for (String skill : selectedSkills) {
@@ -51,18 +36,13 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         String selectedSkill = OptionSkills.get(shiftSelected - 1);
         OptionSkills.clear();
         OptionSkills.add(selectedSkill);
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
 
         System.out.print("Enter the maximum weekly working hours: ");
         int maxWeeklyHours = scanner.nextInt();
 
         Employee newEmployee = new Employee(name, selectedSkills, maxWeeklyHours);
         employees.add(newEmployee);
-<<<<<<< HEAD
-        for (String skill : selectedSkills) {
-=======
         for (String skill : OptionSkills) {
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
             List<Shift> shiftsForSkill = getShiftsForSkill(skill);
             for (Shift shift : shiftsForSkill) {
                 schedule.assignEmployeeToShift(shift.getShiftName(), newEmployee);
@@ -70,10 +50,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         }
 
         System.out.println("New employee added successfully!");
-<<<<<<< HEAD
-=======
         viewShiftSchedule();
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
     }
 
     @Override
@@ -92,13 +69,8 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
     @Override
     public void initializeSampleData() {
         // Sample shifts
-<<<<<<< HEAD
-        Shift morningShift = new Shift("Morning - Afternoon", List.of("Programming", "Communication", "Problem Solving", "Teamwork"));
-        Shift eveningShift = new Shift("Evening - Night", List.of("Customer Service", "Communication", "Adaptability", "Leadership"));
-=======
         Shift morningShift = new Shift("Morning - Afternoon", List.of("Programming","Problem Solving", "Teamwork"));
         Shift eveningShift = new Shift("Evening - Night", List.of("Customer Service","Adaptability", "Leadership"));
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
         Shift nightShift = new Shift("Night - Morning", List.of("Communication", "Organization", "Time Management", "Creativity"));
         shifts.add(morningShift);
         shifts.add(eveningShift);
@@ -113,9 +85,6 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
         // Sample schedule
         schedule.assignEmployeeToShift(morningShift.getShiftName(), employee1);
         schedule.assignEmployeeToShift(eveningShift.getShiftName(), employee2);
-<<<<<<< HEAD
-        schedule.assignEmployeeToShift(nightShift.getShiftName(), employee1);
-=======
     }
 
     @Override
@@ -127,7 +96,6 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
                 System.out.println(skill);
             }
         }
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
     }
 
     private void displayOptions() {
@@ -139,9 +107,6 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
     private List<String> chooseFromOptions(Scanner scanner) {
         List<String> selectedOptions = new ArrayList<>();
         System.out.print("Enter the number of skills to choose: ");
-<<<<<<< HEAD
-        int numChoices = scanner.nextInt();
-=======
 
         int numChoices = 0;
         try {
@@ -154,7 +119,6 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
             System.out.println("An error occurred: " + e.getMessage() + " only accept number in rage");
             addNewEmployee(scanner);
         }
->>>>>>> 63a63b2831d5ed7f93490af38437dc0b76d3867a
 
         for (int i = 0; i < numChoices; i++) {
             System.out.print("Enter skill choice " + (i + 1) + ": ");
