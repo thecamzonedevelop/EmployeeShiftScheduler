@@ -6,6 +6,7 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
     private final List<Employee> employees = new ArrayList<>();
     private final List<Shift> shifts = new ArrayList<>();
     private final Schedule schedule = new Schedule();
+    private int maxEmployeePerShift;
 
     private static final String[] SKILL_CHOICES = {"Programming", "Communication", "Customer Service", "Problem Solving", "Teamwork", "Adaptability", "Leadership", "Organization", "Time Management", "Creativity"};
 
@@ -18,7 +19,8 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
             System.out.println("Invalid name. Please enter a name containing only alphabetic characters.");
             return;
         }
-
+        System.out.print("Enter the maximum weekly working hours: ");
+        int maxWeeklyHours = scanner.nextInt();
         System.out.println("Choose skills from the following options:");
         displayOptions();
         List<String> selectedSkills = chooseFromOptions(scanner);
@@ -30,22 +32,57 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
             System.out.println("Skill: " + skill +  " -> " + count + " Shifts:+ " + shiftsForSkill);
             count ++;
         }
-        List<String> OptionSkills = new ArrayList<>(selectedSkills);
-        System.out.print("Enter your option: ");
-        int shiftSelected = scanner.nextInt();
-        String selectedSkill = OptionSkills.get(shiftSelected - 1);
-        OptionSkills.clear();
-        OptionSkills.add(selectedSkill);
 
-        System.out.print("Enter the maximum weekly working hours: ");
-        int maxWeeklyHours = scanner.nextInt();
+        int shiftSelected;
+        boolean shiftAvailable = false;
+        while (!shiftAvailable) {
+            List<String> OptionSkills = new ArrayList<>(selectedSkills);
+            System.out.print("Enter your option: ");
+            shiftSelected = scanner.nextInt();
+            scanner.nextLine();
+            if (shiftSelected == 123)
+            {
+                shiftAvailable = true;
+                addNewEmployee(scanner);
+            }
 
-        Employee newEmployee = new Employee(name, selectedSkills, maxWeeklyHours);
-        employees.add(newEmployee);
-        for (String skill : OptionSkills) {
-            List<Shift> shiftsForSkill = getShiftsForSkill(skill);
-            for (Shift shift : shiftsForSkill) {
-                schedule.assignEmployeeToShift(shift.getShiftName(), newEmployee);
+            String selectedSkill;
+            selectedSkill = OptionSkills.get(shiftSelected - 1);
+            OptionSkills.clear();
+            OptionSkills.add(selectedSkill);
+
+
+
+            // Get the shift for the selected skill
+            List<Shift> shiftsForSkill = getShiftsForSkill(selectedSkill);
+            Shift chosenShift = shiftsForSkill.get(0); // Assuming only one shift per skill
+
+            // Check if the chosen shift has reached its maximum employee capacity
+            if (schedule.getShiftAssignments().getOrDefault(chosenShift.getShiftName(), new ArrayList<>()).size() < maxEmployeePerShift) {
+                shiftAvailable = true;
+            } else {
+                System.out.println("The chosen shift is full. Please choose again!!");
+                System.out.println("Press 123 to Exit the OptionSelection!");
+            }
+
+            // Check if all shifts are full
+            if (!shiftAvailable && shiftsForSkill.size() == shifts.size()) {
+                System.out.println("All shifts are currently full. Unable to add the employee.");
+                return; // Exit the method
+            }
+
+
+
+
+            if(shiftAvailable) {
+                Employee newEmployee = new Employee(name, selectedSkills, maxWeeklyHours);
+                employees.add(newEmployee);
+                for (String skill : OptionSkills) {
+                    List<Shift> shiftsForSkills = getShiftsForSkill(skill);
+                    for (Shift shift : shiftsForSkills) {
+                        schedule.assignEmployeeToShift(shift.getShiftName(), newEmployee);
+                    }
+                }
             }
         }
 
@@ -97,6 +134,14 @@ public class ShiftSchedulerImpl implements SchedulingSystem {
             }
         }
     }
+
+    @Override
+    public void firstLogin(Scanner scanner) {
+        System.out.print("Enter Maximum employee for each shift: ");
+        maxEmployeePerShift = scanner.nextInt();
+        scanner.nextLine();
+    }
+
 
     private void displayOptions() {
         for (int i = 0; i < ShiftSchedulerImpl.SKILL_CHOICES.length; i++) {

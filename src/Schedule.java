@@ -6,6 +6,7 @@ import java.util.Map;
 public class Schedule {
     private final Map<String, List<Employee>> shiftAssignments;
 
+
     public Schedule() {
         this.shiftAssignments = new HashMap<>();
     }
